@@ -29,7 +29,7 @@ body{
   border-radius:24px;padding:36px 28px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   box-shadow:0 20px 60px rgba(0,0,0,.4);text-align:center
 }
-.wide{max-width:880px}
+.wide{max-width:760px}
 h1,h2{font-family:'Caveat',cursive;font-weight:700;line-height:1.1}
 h1{font-size:clamp(42px,9vw,64px)}
 h2{font-size:clamp(34px,7vw,48px);margin-bottom:12px}
@@ -59,35 +59,16 @@ input[type=text]:focus{border-color:var(--accent)}
 .shake{animation:shake .45s}
 @keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
 .letter{
-  text-align:left;font-family:'Caveat',cursive;font-size:clamp(22px,4.6vw,28px);line-height:1.45;color:var(--text);
-  white-space:pre-wrap;min-height:260px
+  text-align:left;font-family:'Caveat',cursive;font-size:clamp(23px,4.8vw,30px);line-height:1.45;color:var(--text);
+  white-space:pre-wrap;min-height:320px
 }
 .cursor{display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:-3px;animation:blink 1s infinite}
 @keyframes blink{50%{opacity:0}}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-top:22px}
-.flip{perspective:900px;height:150px;cursor:pointer}
-.flip-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
-.flip.open .flip-inner{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;border-radius:18px;display:flex;align-items:center;justify-content:center;padding:14px;
-  backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line)}
-.front{background:linear-gradient(135deg,rgba(124,140,255,.35),rgba(255,184,77,.22));font-size:34px;flex-direction:column;gap:6px}
-.front small{font-size:13px;color:var(--muted);font-weight:700}
-.back{background:rgba(0,0,0,.3);transform:rotateY(180deg);font-weight:700;font-size:15px;line-height:1.4;color:var(--text)}
-.timeline{text-align:left;margin-top:22px;border-left:2px solid var(--accent2);padding-left:22px}
-.tl-item{position:relative;margin-bottom:22px}
-.tl-item::before{content:'';position:absolute;left:-29px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
-.tl-date{font-size:13px;color:var(--accent);font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-.tl-text{color:var(--text);font-weight:600;margin-top:2px}
-.tl-photo{margin-top:8px;width:100%;max-width:320px;border-radius:14px;display:block}
-.choices{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;position:relative;min-height:70px}
-#noBtn{position:relative;transition:transform .2s}
-.promises{text-align:left;margin-top:18px;list-style:none}
-.promises li{padding:12px 14px;margin-bottom:10px;border-radius:14px;background:rgba(0,0,0,.2);border:1px solid var(--line);color:var(--text);font-weight:600}
-.promises li::before{content:'✦ ';color:var(--accent)}
-.ps{margin-top:22px;font-family:'Caveat',cursive;font-size:24px;color:var(--accent);opacity:0;transition:opacity 1.5s}
-.ps.show{opacity:1}
-.footer-note{margin-top:18px;font-size:14px}
-@media (max-width:480px){.card{padding:28px 18px}.grid{grid-template-columns:1fr 1fr}.flip{height:140px}.back{font-size:13px}}
+.after{opacity:0;transition:opacity 1.5s;pointer-events:none}
+.after.show{opacity:1;pointer-events:auto}
+.ps{margin-top:22px;font-family:'Caveat',cursive;font-size:24px;color:var(--accent)}
+.footer-note{margin-top:14px;font-size:14px}
+@media (max-width:480px){.card{padding:28px 18px}}
 </style>
 </head>
 <body>
@@ -118,57 +99,13 @@ input[type=text]:focus{border-color:var(--accent)}
 
 <section class="screen" id="s-letter">
   <div class="card wide">
-    <h2>Пару слов тебе</h2>
-    <div class="letter" id="letter"></div>
-    <button class="btn" id="letterNext" style="visibility:hidden" onclick="go('s-reasons')">Дальше →</button>
-  </div>
-</section>
-
-<section class="screen" id="s-reasons">
-  <div class="card wide">
-    <h2>Почему ты лучшая</h2>
-    <p>Тыкай на карточки и открывай по одной</p>
-    <div class="grid" id="reasons"></div>
-    <button class="btn" onclick="go('s-memories')">Дальше →</button>
-  </div>
-</section>
-
-<section class="screen" id="s-memories">
-  <div class="card wide">
-    <h2>Как всё начиналось</h2>
-    <p>Мало времени прошло, а будто знаю тебя сто лет</p>
-    <div class="timeline" id="timeline"></div>
-    <button class="btn" onclick="go('s-promises')">Дальше →</button>
-  </div>
-</section>
-
-<section class="screen" id="s-promises">
-  <div class="card">
-    <h2>Официально обещаю</h2>
-    <ul class="promises" id="promises"></ul>
-    <button class="btn" onclick="go('s-final')">И последнее...</button>
-  </div>
-</section>
-
-<section class="screen" id="s-final">
-  <div class="card">
-    <div class="emoji">🏆</div>
-    <h2 id="finalQ"></h2>
-    <div class="choices">
-      <button class="btn" onclick="yes()">Да, я знаю 😎</button>
-      <button class="btn ghost" id="noBtn">Нет</button>
-    </div>
-  </div>
-</section>
-
-<section class="screen" id="s-end">
-  <div class="card">
     <div class="emoji">✨</div>
-    <h1>Вот и правильно</h1>
-    <p id="endText"></p>
-    <p class="ps" id="ps"></p>
-    <p class="footer-note">Сделай скриншот и пришли мне 📸</p>
-    <button class="btn ghost" onclick="location.reload()">Пройти заново</button>
+    <div class="letter" id="letter"></div>
+    <div class="after" id="after">
+      <p class="ps" id="ps"></p>
+      <p class="footer-note">Сделай скриншот и пришли мне 📸</p>
+      <button class="btn ghost" onclick="location.reload()">Пройти заново</button>
+    </div>
   </div>
 </section>
 
@@ -181,70 +118,47 @@ const CONFIG = {
 
   // answers — все допустимые варианты (регистр, ё/е и знаки не важны)
   questions: [
-    { q: "Когда у меня день рождения? (ДД.ММ)",
-      hint: "Подсказка: ты спрашивала 7 ноября, а я ответил, что мне 1069 лет",
-      answers: ["04.07", "4.07", "04.07.957", "4 июля", "четвертое июля"] },
-    { q: "В какую игру мы впервые сыграли вместе 1 на 1?",
-      hint: "Подсказка: ты в неё когда-то донатила больше, чем стоит признавать",
-      answers: ["pubg", "пабг", "пубг", "pubg mobile", "пабг мобайл", "пубг мобайл"] },
-    { q: "Кто смотрит камеры и прилетит в ту же секунду, если мы ляжем на матрас?",
-      hint: "Подсказка: есть даже стикер с Шреком",
-      answers: ["олег"] },
-    { q: "Кого ты любишь больше всего на свете? (кроме меня, понятное дело)",
-      hint: "Подсказка: мяу",
-      answers: ["котов", "коты", "кошек", "кошки", "котики", "котиков", "кот", "кошка"] },
+    { q: "Когда мой день рождения? (ДД.ММ)",
+      hint: "Подсказка: я долгожитель 957 года рождения 😄",
+      answers: ["04.07", "4.07", "04.7", "4.7", "0407", "4 июля", "четвертое июля", "04.07.957"] },
+    { q: "Наша любимая и одновременно нелюбимая игра?",
+      hint: "Подсказка: Москва, Кутузовский...",
+      answers: ["rmrp", "рмрп", "rmrp москва", "рмрп москва", "москва", "кутузовский"] },
+    { q: "Когда началось наше полноценное общение? (ДД.ММ)",
+      hint: "Подсказка: ночь, ПАБГ, 1 на 1",
+      answers: ["02.11", "2.11", "02.11.2026", "2.11.2026", "0211", "2 ноября", "второе ноября"] },
+    { q: "Кого не хватало 09.11.2026 вечером?",
+      hint: "Подсказка: он сейчас ждёт, когда ты ответишь 🙂",
+      answers: ["меня", "тебя", "ты", "его", "мне тебя", "тебя не хватало", "меня не хватало"] },
+    { q: "Вечер, когда мы говорили до слёз? (ДД.ММ)",
+      hint: "Подсказка: на следующий день после прошлого вопроса",
+      answers: ["10.11", "10.11.2026", "1011", "10 ноября", "десятое ноября"] },
   ],
 
   letter:
 `{name},
 
-мы общаемся совсем недавно — первое «Привет» было 24 октября, а по-настоящему всё началось с той ночи, когда ты разнесла меня в ПАБГе, перед этим честно заявив «я лох».
+спасибо тебе, что ты появилась в моей жизни.
 
-И вот прошло всего несколько недель, а мне уже сложно представить день без твоих «хахахаха», мемов с Олегом и разговоров до трёх ночи.
+Я и подумать не мог, что всё сложится именно так. Что однажды, совсем неожиданно, появится человек, с которым можно и поплакать, и смеяться до боли в животе, и гулять до самого утра — и ни капли не устать.
 
-Ты самый лёгкий, смешной и настоящий человек из всех, кого я встречал. С тобой не нужно никем притворяться. Я правда рад, что ты появилась.
+Человек, который, почти меня не зная, будет переживать за каждый мой шаг.
 
-Спасибо, что ты есть.`,
+Я правда это ценю. Больше, чем умею сказать словами.
 
-  reasons: [
-    "Ты смеёшься так, что заражаешь всех вокруг",
-    "Говоришь «я лох» — и тут же чуть не выносишь меня",
-    "С тобой можно болтать хоть до утра",
-    "Ты всегда честно скажешь, что думаешь",
-    "Твоя любовь к котам — это отдельный вид искусства",
-    "Ты настоящая, без масок и пафоса",
-    "С тобой даже смена кажется короче",
-    "Ты просто лучшая. Без вариантов.",
-  ],
+Спасибо тебе, что ты есть.`,
 
-  // photo — необязательно: положи файл в папку photos/ и впиши "photos/1.jpg"
-  memories: [
-    { date: "24 октября",  text: "Первое «Привет» и «Сегодня ты на смене?»", photo: "" },
-    { date: "2 ноября",    text: "Ночная катка 1 на 1 в ПАБГе. Ты сказала «я лох» — и чуть меня не вынесла", photo: "" },
-    { date: "Той же ночью", text: "План пройти GTA San Andreas вдвоём, с чит-кодами, конечно", photo: "" },
-    { date: "7 ноября",    text: "Ты спросила мой день рождения, а я оказался долгожителем 957 года рождения", photo: "" },
-    { date: "Сегодня",     text: "Этот сайт. И это только начало", photo: "" },
-  ],
-
-  promises: [
-    "Всегда быть на связи, когда тебе скучно или грустно",
-    "Не обижаться, когда ты снова меня вынесешь",
-    "Скидывать тебе котиков без повода",
-    "Напоминать тебе, какая ты классная, пока не запомнишь",
-  ],
-
-  finalQuestion: "Ты знаешь, что ты лучшая?",
-  endText: "Теперь это официально: ты лучшая. Не спорь.",
-  // лёгкий намёк — появляется через пару секунд
+  // лёгкий намёк — появляется после письма
   ps: "P.S. Иногда мне кажется, что слово «друг» для тебя слишком маленькое 🙂",
 };
 /* ===================================================================== */
 
 const $ = id => document.getElementById(id);
-const norm = s => s.toLowerCase().replace(/ё/g,'е').replace(/[^\p{L}\p{N}.]+/gu,' ').trim().replace(/\s+/g,' ');
+const norm = s => s.toLowerCase().replace(/ё/g,'е').replace(/[,\/\-]/g,'.').replace(/[^\p{L}\p{N}.]+/gu,' ').trim().replace(/\s+/g,' ').replace(/\.+$/,'');
 let qi = 0;
 
 $('introTitle').textContent = `Привет, ${CONFIG.name}!`;
+$('ps').textContent = CONFIG.ps;
 
 function go(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -271,7 +185,7 @@ function checkAnswer(e){
   if(!v) return;
   if(q.answers.some(a=>norm(a)===v)){
     $('qMsg').textContent = 'Верно!'; $('qMsg').className='msg ok'; burst(25);
-    setTimeout(()=>{ qi++; if(qi<CONFIG.questions.length){ showQ(); $('qInput').focus(); } else { burst(70); go('s-letter'); } }, 800);
+    setTimeout(()=>{ qi++; if(qi<CONFIG.questions.length){ showQ(); $('qInput').focus(); } else { burst(90); go('s-letter'); } }, 800);
   } else {
     tries++;
     $('qMsg').textContent = wrong[(tries-1)%wrong.length]; $('qMsg').className='msg bad';
@@ -283,44 +197,16 @@ function checkAnswer(e){
 let typed=false;
 function typeLetter(){
   if(typed) return; typed=true;
-  const text = CONFIG.letter.replace('{name}', CONFIG.name), el=$('letter'); let i=0;
+  const text = CONFIG.letter.replace('{name}', CONFIG.name), el=$('letter'); let i=0, done=false;
   el.innerHTML='<span id="lt"></span><span class="cursor"></span>';
   const t=$('lt');
+  const finish=()=>{ if(done) return; done=true; setTimeout(()=>{ $('after').classList.add('show'); burst(60); },1200); };
   (function step(){
-    if(i<text.length){ t.textContent += text[i++]; setTimeout(step, text[i-1]===','||text[i-1]==='.'?160:30); }
-    else { $('letterNext').style.visibility='visible'; }
+    if(i<text.length){ t.textContent += text[i++]; setTimeout(step, '.,—'.includes(text[i-1])?180:34); }
+    else finish();
   })();
   el.onclick=()=>{ i=text.length; t.textContent=text; };
 }
-
-const icons=['😂','🎮','🌙','💬','🐈','🌟','⏰','🏆'];
-$('reasons').innerHTML = CONFIG.reasons.map((r,i)=>`
-  <div class="flip" onclick="this.classList.add('open');burst(8)">
-    <div class="flip-inner">
-      <div class="face front">${icons[i%icons.length]}<small>Причина №${i+1}</small></div>
-      <div class="face back">${r}</div>
-    </div>
-  </div>`).join('');
-
-$('timeline').innerHTML = CONFIG.memories.map(m=>`
-  <div class="tl-item">
-    <div class="tl-date">${m.date}</div>
-    <div class="tl-text">${m.text}</div>
-    ${m.photo?`<img class="tl-photo" src="${m.photo}" alt="">`:''}
-  </div>`).join('');
-
-$('promises').innerHTML = CONFIG.promises.map(p=>`<li>${p}</li>`).join('');
-$('finalQ').textContent = CONFIG.finalQuestion;
-$('endText').textContent = CONFIG.endText;
-$('ps').textContent = CONFIG.ps;
-
-const noBtn=$('noBtn'); const noTexts=["Нет","Точно?","Подумай ещё","Не-а 😏","Не получится","Сдавайся"]; let noI=0;
-function runAway(){
-  const x=(Math.random()*2-1)*120, y=(Math.random()*2-1)*80;
-  noBtn.style.transform=`translate(${x}px,${y}px)`; noBtn.textContent=noTexts[++noI%noTexts.length];
-}
-noBtn.addEventListener('mouseenter',runAway); noBtn.addEventListener('click',e=>{e.preventDefault();runAway();});
-function yes(){ burst(160); go('s-end'); setTimeout(()=>$('ps').classList.add('show'),2500); }
 
 // Звёздное небо + салют из искр
 const cv=$('sky'), ctx=cv.getContext('2d'); let W,H, stars=[], sparks=[];
