@@ -3,46 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Только для тебя</title>
+<title>Для Насти</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg1:#2a0f2e; --bg2:#5b1847; --card:rgba(255,255,255,.08); --line:rgba(255,255,255,.18);
-  --text:#fff3f7; --muted:#f2c6d8; --accent:#ff5c8a; --accent2:#ffb36b; --ok:#7dffb0; --bad:#ff7b7b;
+  --bg1:#0f1226; --bg2:#1b1f3f; --card:rgba(255,255,255,.07); --line:rgba(255,255,255,.16);
+  --text:#f4f1ff; --muted:#c9c4e6; --accent:#ffb84d; --accent2:#7c8cff; --ok:#7dffb0; --bad:#ff8a8a;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
   font-family:'Nunito',system-ui,sans-serif;color:var(--text);
-  background:radial-gradient(1200px 800px at 20% 10%,#7a2160 0%,transparent 60%),
-             radial-gradient(1000px 700px at 90% 90%,#8a3a1f 0%,transparent 55%),
-             linear-gradient(160deg,var(--bg1),var(--bg2));
+  background:radial-gradient(1100px 700px at 15% 0%,#2b2f6b 0%,transparent 60%),
+             radial-gradient(900px 700px at 100% 100%,#4a2c5e 0%,transparent 55%),
+             linear-gradient(170deg,var(--bg1),var(--bg2));
   background-attachment:fixed;overflow-x:hidden;min-height:100vh;
 }
-#hearts{position:fixed;inset:0;pointer-events:none;z-index:0}
+#sky{position:fixed;inset:0;pointer-events:none;z-index:0}
 .screen{position:relative;z-index:1;min-height:100vh;display:none;align-items:center;justify-content:center;padding:32px 16px}
 .screen.active{display:flex;animation:fade .7s ease}
 @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .card{
   width:100%;max-width:560px;background:var(--card);border:1px solid var(--line);
   border-radius:24px;padding:36px 28px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center
+  box-shadow:0 20px 60px rgba(0,0,0,.4);text-align:center
 }
 .wide{max-width:880px}
 h1,h2{font-family:'Caveat',cursive;font-weight:700;line-height:1.1}
 h1{font-size:clamp(42px,9vw,64px)}
 h2{font-size:clamp(34px,7vw,48px);margin-bottom:12px}
 p{line-height:1.6;color:var(--muted)}
-.big-heart{font-size:72px;display:inline-block;animation:beat 1.2s infinite}
-@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
+.emoji{font-size:64px;display:inline-block;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px) rotate(-4deg)}}
 .btn{
-  margin-top:24px;border:0;cursor:pointer;font:800 17px 'Nunito',sans-serif;color:#fff;
-  padding:14px 30px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));
-  box-shadow:0 8px 24px rgba(255,92,138,.4);transition:transform .15s
+  margin-top:24px;border:0;cursor:pointer;font:800 17px 'Nunito',sans-serif;color:#1a1530;
+  padding:14px 30px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#ffd88a);
+  box-shadow:0 8px 24px rgba(255,184,77,.3);transition:transform .15s
 }
 .btn:hover{transform:translateY(-2px) scale(1.03)}
-.btn.ghost{background:transparent;border:1px solid var(--line);box-shadow:none}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none}
 .progress{display:flex;gap:8px;justify-content:center;margin-bottom:22px}
 .progress span{width:34px;height:6px;border-radius:6px;background:var(--line);transition:background .4s}
 .progress span.done{background:var(--accent)}
@@ -70,38 +70,38 @@ input[type=text]:focus{border-color:var(--accent)}
 .flip.open .flip-inner{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;border-radius:18px;display:flex;align-items:center;justify-content:center;padding:14px;
   backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line)}
-.front{background:linear-gradient(135deg,rgba(255,92,138,.35),rgba(255,179,107,.25));font-size:34px;flex-direction:column;gap:6px}
+.front{background:linear-gradient(135deg,rgba(124,140,255,.35),rgba(255,184,77,.22));font-size:34px;flex-direction:column;gap:6px}
 .front small{font-size:13px;color:var(--muted);font-weight:700}
 .back{background:rgba(0,0,0,.3);transform:rotateY(180deg);font-weight:700;font-size:15px;line-height:1.4;color:var(--text)}
-.timeline{text-align:left;margin-top:22px;border-left:2px solid var(--accent);padding-left:22px}
+.timeline{text-align:left;margin-top:22px;border-left:2px solid var(--accent2);padding-left:22px}
 .tl-item{position:relative;margin-bottom:22px}
-.tl-item::before{content:'❤';position:absolute;left:-33px;top:0;color:var(--accent);font-size:18px;background:var(--bg2);border-radius:50%}
-.tl-date{font-size:13px;color:var(--accent2);font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.tl-item::before{content:'';position:absolute;left:-29px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.tl-date{font-size:13px;color:var(--accent);font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .tl-text{color:var(--text);font-weight:600;margin-top:2px}
 .tl-photo{margin-top:8px;width:100%;max-width:320px;border-radius:14px;display:block}
 .choices{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;position:relative;min-height:70px}
 #noBtn{position:relative;transition:transform .2s}
 .promises{text-align:left;margin-top:18px;list-style:none}
 .promises li{padding:12px 14px;margin-bottom:10px;border-radius:14px;background:rgba(0,0,0,.2);border:1px solid var(--line);color:var(--text);font-weight:600}
-.promises li::before{content:'✨ '}
+.promises li::before{content:'✦ ';color:var(--accent)}
+.ps{margin-top:22px;font-family:'Caveat',cursive;font-size:24px;color:var(--accent);opacity:0;transition:opacity 1.5s}
+.ps.show{opacity:1}
 .footer-note{margin-top:18px;font-size:14px}
 @media (max-width:480px){.card{padding:28px 18px}.grid{grid-template-columns:1fr 1fr}.flip{height:140px}.back{font-size:13px}}
 </style>
 </head>
 <body>
-<canvas id="hearts"></canvas>
+<canvas id="sky"></canvas>
 
-<!-- ЭКРАН 0: приветствие -->
 <section class="screen active" id="s-intro">
   <div class="card">
-    <div class="big-heart">💌</div>
+    <div class="emoji">🔐</div>
     <h1 id="introTitle">Привет!</h1>
-    <p>Это место сделано только для тебя.<br>Но сначала докажи, что ты — это ты 😉<br>Ответь на несколько вопросов, которые знаем только мы.</p>
-    <button class="btn" onclick="startQuiz()">Я готова</button>
+    <p>Тут кое-что лежит только для тебя.<br>Но сначала докажи, что ты — это ты 😏<br>Ответь на вопросы, которые знаем только мы.</p>
+    <button class="btn" onclick="startQuiz()">Погнали</button>
   </div>
 </section>
 
-<!-- ЭКРАН 1: вопросы-пароли -->
 <section class="screen" id="s-quiz">
   <div class="card">
     <div class="progress" id="progress"></div>
@@ -116,62 +116,57 @@ input[type=text]:focus{border-color:var(--accent)}
   </div>
 </section>
 
-<!-- ЭКРАН 2: письмо-признание -->
 <section class="screen" id="s-letter">
   <div class="card wide">
-    <h2>Моё письмо тебе</h2>
+    <h2>Пару слов тебе</h2>
     <div class="letter" id="letter"></div>
     <button class="btn" id="letterNext" style="visibility:hidden" onclick="go('s-reasons')">Дальше →</button>
   </div>
 </section>
 
-<!-- ЭКРАН 3: причины -->
 <section class="screen" id="s-reasons">
   <div class="card wide">
-    <h2>Почему ты самая лучшая</h2>
-    <p>Нажимай на карточки — открывай по одной 💗</p>
+    <h2>Почему ты лучшая</h2>
+    <p>Тыкай на карточки и открывай по одной</p>
     <div class="grid" id="reasons"></div>
     <button class="btn" onclick="go('s-memories')">Дальше →</button>
   </div>
 </section>
 
-<!-- ЭКРАН 4: воспоминания -->
 <section class="screen" id="s-memories">
   <div class="card wide">
-    <h2>Наши моменты</h2>
-    <p>То, что я никогда не забуду</p>
+    <h2>Как всё начиналось</h2>
+    <p>Мало времени прошло, а будто знаю тебя сто лет</p>
     <div class="timeline" id="timeline"></div>
     <button class="btn" onclick="go('s-promises')">Дальше →</button>
   </div>
 </section>
 
-<!-- ЭКРАН 5: обещания -->
 <section class="screen" id="s-promises">
   <div class="card">
-    <h2>Я обещаю тебе</h2>
+    <h2>Официально обещаю</h2>
     <ul class="promises" id="promises"></ul>
     <button class="btn" onclick="go('s-final')">И последнее...</button>
   </div>
 </section>
 
-<!-- ЭКРАН 6: финальный вопрос -->
 <section class="screen" id="s-final">
   <div class="card">
-    <div class="big-heart">💖</div>
+    <div class="emoji">🏆</div>
     <h2 id="finalQ"></h2>
-    <div class="choices" id="choices">
-      <button class="btn" onclick="yes()">Да ❤️</button>
+    <div class="choices">
+      <button class="btn" onclick="yes()">Да, я знаю 😎</button>
       <button class="btn ghost" id="noBtn">Нет</button>
     </div>
   </div>
 </section>
 
-<!-- ЭКРАН 7: конец -->
 <section class="screen" id="s-end">
   <div class="card">
-    <div class="big-heart">🥰</div>
-    <h1>Я знал!</h1>
+    <div class="emoji">✨</div>
+    <h1>Вот и правильно</h1>
     <p id="endText"></p>
+    <p class="ps" id="ps"></p>
     <p class="footer-note">Сделай скриншот и пришли мне 📸</p>
     <button class="btn ghost" onclick="location.reload()">Пройти заново</button>
   </div>
@@ -179,57 +174,69 @@ input[type=text]:focus{border-color:var(--accent)}
 
 <script>
 /* =====================================================================
-   ВСЁ, ЧТО НУЖНО ПОМЕНЯТЬ — ЗДЕСЬ. Остальной код трогать не нужно.
+   ВСЁ, ЧТО МОЖНО ПОМЕНЯТЬ — ЗДЕСЬ.
    ===================================================================== */
 const CONFIG = {
-  name: "Солнышко",               // как обращаться к ней
+  name: "Настя",
 
-  // Вопросы-пароли. answers — все допустимые варианты ответа
-  // (регистр, пробелы, ё/е и знаки препинания не важны).
+  // answers — все допустимые варианты (регистр, ё/е и знаки не важны)
   questions: [
-    { q: "Где мы впервые встретились?",          hint: "Подсказка: вспомни то место 😉", answers: ["в школе", "школа"] },
-    { q: "Как я тебя называю, когда никто не слышит?", hint: "Подсказка: это мило", answers: ["зайка"] },
-    { q: "Какой у меня любимый цвет?",          hint: "Подсказка: как небо",            answers: ["синий", "голубой"] },
-    { q: "Какого числа мы познакомились? (ДД.ММ)", hint: "Подсказка: осень",            answers: ["01.09", "1.09", "1 сентября"] },
+    { q: "Когда у меня день рождения? (ДД.ММ)",
+      hint: "Подсказка: ты спрашивала 7 ноября, а я ответил, что мне 1069 лет",
+      answers: ["04.07", "4.07", "04.07.957", "4 июля", "четвертое июля"] },
+    { q: "В какую игру мы впервые сыграли вместе 1 на 1?",
+      hint: "Подсказка: ты в неё когда-то донатила больше, чем стоит признавать",
+      answers: ["pubg", "пабг", "пубг", "pubg mobile", "пабг мобайл", "пубг мобайл"] },
+    { q: "Кто смотрит камеры и прилетит в ту же секунду, если мы ляжем на матрас?",
+      hint: "Подсказка: есть даже стикер с Шреком",
+      answers: ["олег"] },
+    { q: "Кого ты любишь больше всего на свете? (кроме меня, понятное дело)",
+      hint: "Подсказка: мяу",
+      answers: ["котов", "коты", "кошек", "кошки", "котики", "котиков", "кот", "кошка"] },
   ],
 
   letter:
-`Дорогая {name},
+`{name},
 
-я долго думал, как сказать это так, чтобы ты поверила, что это правда от всего сердца. Поэтому сделал целый сайт 🙂
+мы общаемся совсем недавно — первое «Привет» было 24 октября, а по-настоящему всё началось с той ночи, когда ты разнесла меня в ПАБГе, перед этим честно заявив «я лох».
 
-Ты — самое лучшее, что случалось со мной за всё время. С тобой даже самые обычные дни становятся особенными. Ты умеешь поддержать, рассмешить и просто быть рядом тогда, когда это нужнее всего.
+И вот прошло всего несколько недель, а мне уже сложно представить день без твоих «хахахаха», мемов с Олегом и разговоров до трёх ночи.
 
-Спасибо тебе за то, что ты есть. Правда.`,
+Ты самый лёгкий, смешной и настоящий человек из всех, кого я встречал. С тобой не нужно никем притворяться. Я правда рад, что ты появилась.
+
+Спасибо, что ты есть.`,
 
   reasons: [
-    "Твоя улыбка делает любой день лучше",
-    "Ты всегда выслушаешь и поймёшь",
-    "С тобой можно смеяться до слёз",
-    "Ты настоящая — без масок",
-    "Ты веришь в меня, даже когда я сам не верю",
-    "Ты самая красивая (и это не обсуждается)",
-    "С тобой спокойно и тепло",
-    "Ты просто лучшая. Точка.",
+    "Ты смеёшься так, что заражаешь всех вокруг",
+    "Говоришь «я лох» — и тут же чуть не выносишь меня",
+    "С тобой можно болтать хоть до утра",
+    "Ты всегда честно скажешь, что думаешь",
+    "Твоя любовь к котам — это отдельный вид искусства",
+    "Ты настоящая, без масок и пафоса",
+    "С тобой даже смена кажется короче",
+    "Ты просто лучшая. Без вариантов.",
   ],
 
   // photo — необязательно: положи файл в папку photos/ и впиши "photos/1.jpg"
   memories: [
-    { date: "Начало",          text: "День, когда мы познакомились",           photo: "" },
-    { date: "Самое смешное",   text: "Тот раз, когда мы не могли перестать смеяться", photo: "" },
-    { date: "Самое тёплое",    text: "Вечер, когда я понял, как ты мне дорога", photo: "" },
-    { date: "Сейчас",          text: "Этот сайт — и это только начало",         photo: "" },
+    { date: "24 октября",  text: "Первое «Привет» и «Сегодня ты на смене?»", photo: "" },
+    { date: "2 ноября",    text: "Ночная катка 1 на 1 в ПАБГе. Ты сказала «я лох» — и чуть меня не вынесла", photo: "" },
+    { date: "Той же ночью", text: "План пройти GTA San Andreas вдвоём, с чит-кодами, конечно", photo: "" },
+    { date: "7 ноября",    text: "Ты спросила мой день рождения, а я оказался долгожителем 957 года рождения", photo: "" },
+    { date: "Сегодня",     text: "Этот сайт. И это только начало", photo: "" },
   ],
 
   promises: [
-    "Всегда быть рядом, когда тебе плохо",
-    "Радоваться твоим победам как своим",
-    "Говорить тебе приятное просто так",
-    "Никогда не дать тебе забыть, какая ты классная",
+    "Всегда быть на связи, когда тебе скучно или грустно",
+    "Не обижаться, когда ты снова меня вынесешь",
+    "Скидывать тебе котиков без повода",
+    "Напоминать тебе, какая ты классная, пока не запомнишь",
   ],
 
-  finalQuestion: "Ты знаешь, что ты самая лучшая?",
-  endText: "Теперь это официально: ты самая лучшая. Навсегда. ❤️",
+  finalQuestion: "Ты знаешь, что ты лучшая?",
+  endText: "Теперь это официально: ты лучшая. Не спорь.",
+  // лёгкий намёк — появляется через пару секунд
+  ps: "P.S. Иногда мне кажется, что слово «друг» для тебя слишком маленькое 🙂",
 };
 /* ===================================================================== */
 
@@ -257,14 +264,14 @@ function showQ(){
   $('qInput').value=''; $('qMsg').textContent=''; $('qMsg').className='msg';
   [...$('progress').children].forEach((s,i)=>s.classList.toggle('done', i<qi));
 }
-const wrong = ["Хм, не-а 🙈","Попробуй ещё раз 😏","Почти... но нет","Ты точно ты? 🤨"];
+const wrong = ["Не-а 🙈","Попробуй ещё раз 😏","Почти... но нет","Ты точно Настя? 🤨"];
 function checkAnswer(e){
   e.preventDefault();
   const q = CONFIG.questions[qi], v = norm($('qInput').value);
   if(!v) return;
   if(q.answers.some(a=>norm(a)===v)){
-    $('qMsg').textContent = 'Верно! 💗'; $('qMsg').className='msg ok'; burst(20);
-    setTimeout(()=>{ qi++; if(qi<CONFIG.questions.length){ showQ(); $('qInput').focus(); } else { burst(60); go('s-letter'); } }, 800);
+    $('qMsg').textContent = 'Верно!'; $('qMsg').className='msg ok'; burst(25);
+    setTimeout(()=>{ qi++; if(qi<CONFIG.questions.length){ showQ(); $('qInput').focus(); } else { burst(70); go('s-letter'); } }, 800);
   } else {
     tries++;
     $('qMsg').textContent = wrong[(tries-1)%wrong.length]; $('qMsg').className='msg bad';
@@ -280,16 +287,17 @@ function typeLetter(){
   el.innerHTML='<span id="lt"></span><span class="cursor"></span>';
   const t=$('lt');
   (function step(){
-    if(i<text.length){ t.textContent += text[i++]; setTimeout(step, text[i-1]===','||text[i-1]==='.'?160:32); }
+    if(i<text.length){ t.textContent += text[i++]; setTimeout(step, text[i-1]===','||text[i-1]==='.'?160:30); }
     else { $('letterNext').style.visibility='visible'; }
   })();
   el.onclick=()=>{ i=text.length; t.textContent=text; };
 }
 
+const icons=['😂','🎮','🌙','💬','🐈','🌟','⏰','🏆'];
 $('reasons').innerHTML = CONFIG.reasons.map((r,i)=>`
-  <div class="flip" onclick="this.classList.add('open');burst(6)">
+  <div class="flip" onclick="this.classList.add('open');burst(8)">
     <div class="flip-inner">
-      <div class="face front">💝<small>Причина №${i+1}</small></div>
+      <div class="face front">${icons[i%icons.length]}<small>Причина №${i+1}</small></div>
       <div class="face back">${r}</div>
     </div>
   </div>`).join('');
@@ -304,34 +312,39 @@ $('timeline').innerHTML = CONFIG.memories.map(m=>`
 $('promises').innerHTML = CONFIG.promises.map(p=>`<li>${p}</li>`).join('');
 $('finalQ').textContent = CONFIG.finalQuestion;
 $('endText').textContent = CONFIG.endText;
+$('ps').textContent = CONFIG.ps;
 
-// Кнопка «Нет» убегает
-const noBtn=$('noBtn'); const noTexts=["Нет","Точно?","Подумай ещё","Не-а 😏","Не получится","Ну пожалуйста 🥺"]; let noI=0;
+const noBtn=$('noBtn'); const noTexts=["Нет","Точно?","Подумай ещё","Не-а 😏","Не получится","Сдавайся"]; let noI=0;
 function runAway(){
   const x=(Math.random()*2-1)*120, y=(Math.random()*2-1)*80;
   noBtn.style.transform=`translate(${x}px,${y}px)`; noBtn.textContent=noTexts[++noI%noTexts.length];
 }
 noBtn.addEventListener('mouseenter',runAway); noBtn.addEventListener('click',e=>{e.preventDefault();runAway();});
-function yes(){ burst(150); go('s-end'); }
+function yes(){ burst(160); go('s-end'); setTimeout(()=>$('ps').classList.add('show'),2500); }
 
-// Сердечки на фоне
-const cv=$('hearts'), ctx=cv.getContext('2d'); let W,H, parts=[];
+// Звёздное небо + салют из искр
+const cv=$('sky'), ctx=cv.getContext('2d'); let W,H, stars=[], sparks=[];
 function rs(){ W=cv.width=innerWidth; H=cv.height=innerHeight; } rs(); addEventListener('resize',rs);
-function heart(x,y,s,c,a){ ctx.save(); ctx.globalAlpha=a; ctx.fillStyle=c; ctx.translate(x,y); ctx.scale(s,s);
-  ctx.beginPath(); ctx.moveTo(0,3); ctx.bezierCurveTo(-6,-3,-3,-9,0,-5); ctx.bezierCurveTo(3,-9,6,-3,0,3); ctx.fill(); ctx.restore(); }
-const cols=['#ff5c8a','#ffb36b','#ff8fb1','#ffd1dc'];
-for(let i=0;i<28;i++) parts.push({x:Math.random()*W,y:Math.random()*H,vy:-.3-Math.random()*.6,vx:0,s:1+Math.random()*2,c:cols[i%4],a:.25+Math.random()*.3,bg:1});
-function burst(n){ for(let i=0;i<n;i++){ const ang=Math.random()*Math.PI*2, sp=2+Math.random()*6;
-  parts.push({x:W/2,y:H/2,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp-3,s:1.5+Math.random()*2.5,c:cols[i%4],a:1,life:90+Math.random()*40}); } }
-(function loop(){
+for(let i=0;i<120;i++) stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.4+.3,p:Math.random()*6.28});
+const cols=['#ffb84d','#ffd88a','#7c8cff','#b9c2ff','#ffffff'];
+function burst(n){ for(let i=0;i<n;i++){ const a=Math.random()*6.28, sp=2+Math.random()*6;
+  sparks.push({x:W/2,y:H/2,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-3,r:1.5+Math.random()*2,c:cols[i%cols.length],life:100+Math.random()*40}); } }
+let shoot=null;
+(function loop(t){
   ctx.clearRect(0,0,W,H);
-  parts=parts.filter(p=>{
-    if(p.bg){ p.y+=p.vy; p.x+=Math.sin(p.y/40)*.3; if(p.y<-20){p.y=H+20;p.x=Math.random()*W;} }
-    else { p.x+=p.vx; p.y+=p.vy; p.vy+=.12; p.vx*=.99; p.life--; p.a=Math.max(0,p.life/120); if(p.life<=0) return false; }
-    heart(p.x,p.y,p.s,p.c,p.a); return true;
-  });
-  requestAnimationFrame(loop);
-})();
+  for(const s of stars){ ctx.globalAlpha=.35+.35*Math.sin(s.p+t/900); ctx.fillStyle='#fff';
+    ctx.beginPath(); ctx.arc(s.x*W,s.y*H,s.r,0,6.28); ctx.fill(); }
+  if(!shoot && Math.random()<.004) shoot={x:Math.random()*W*.7,y:Math.random()*H*.3,l:0};
+  if(shoot){ shoot.l+=12; const g=ctx.createLinearGradient(shoot.x,shoot.y,shoot.x+shoot.l,shoot.y+shoot.l*.4);
+    g.addColorStop(0,'rgba(255,255,255,0)'); g.addColorStop(1,'rgba(255,255,255,.8)');
+    ctx.globalAlpha=1; ctx.strokeStyle=g; ctx.lineWidth=1.5; ctx.beginPath();
+    ctx.moveTo(shoot.x+shoot.l*.6,shoot.y+shoot.l*.24); ctx.lineTo(shoot.x+shoot.l,shoot.y+shoot.l*.4); ctx.stroke();
+    if(shoot.l>260) shoot=null; }
+  sparks=sparks.filter(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=.1; p.vx*=.99; p.life--;
+    ctx.globalAlpha=Math.max(0,p.life/120); ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.28); ctx.fill();
+    return p.life>0; });
+  ctx.globalAlpha=1; requestAnimationFrame(loop);
+})(0);
 </script>
 </body>
 </html>
